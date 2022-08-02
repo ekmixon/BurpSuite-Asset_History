@@ -41,10 +41,11 @@ class BurpExtender(IBurpExtender, IScannerCheck):
     # issues from our scans include affected parameters/values in the detail,
     # which we will want to report as unique issue instances
     def consolidateDuplicateIssues(self, existingIssue, newIssue):
-        if (existingIssue.getIssueDetail() == newIssue.getIssueDetail()):
-            return -1
-        else:
-            return 0
+        return (
+            -1
+            if (existingIssue.getIssueDetail() == newIssue.getIssueDetail())
+            else 0
+        )
 
     # Implement the doPassiveScan method of IScannerCheck interface
     # Burp Scanner invokes this method for each base request/response that is passively scanned.
